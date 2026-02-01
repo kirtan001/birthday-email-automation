@@ -1,7 +1,6 @@
 name: Birthday Bot
 
 on:
-  push:                   # Trigger on push events
   schedule:
     - cron: '0 8 * * *' # Runs every day at 8:00 AM UTC
   workflow_dispatch:      # Allows manual triggering
