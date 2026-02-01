@@ -44,16 +44,20 @@ Kirtan
         body={'raw': encoded_msg}
     ).execute()
 
-
 def main():
     today = date.today().strftime("%m-%d")
     service = get_gmail_service()
 
-    with open('birthdays.csv', newline='') as file:
+    with open('birthdays.csv', newline='', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
+
         for row in reader:
+            # Normalize keys and values
+            row = {k.strip().lower(): v.strip() for k, v in row.items()}
+
             if row['dob'][5:] == today:
                 send_email(service, row['email'], row['name'])
+
 
 
 if __name__ == "__main__":
